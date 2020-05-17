@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Flask Tutorial</title>
+  </head>
+  <body>
+    {% block content %}
+
+    <h1> AppName </h1>
+    <p> Enter image URL </p>
+
+    <form action="{{ url_for('handle_data') }}" method="post">
+    <input type="text" name="imgurl">
+    <input type="submit">
+
+    <p>
+    <A HREF="upload-image">Upload an image instead.</A>
+    </p>
+    </form>
+
+    {% endblock %}
+  </body>
+</html>
