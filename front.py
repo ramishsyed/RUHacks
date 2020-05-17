@@ -12,10 +12,17 @@ def home():
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
     projectpath = request.form['imgurl']
-    appOut = runApp(projectpath)
-    rendered = render_template('template.html', \
-                               title = "Output", \
-                               text = [str(appOut[0]),str(appOut[1])])
+    lang = request.form['language']
+    appOut = runApp(projectpath,lang)
+    originaltxt = str(appOut[0])
+    originaltxt = originaltxt.replace("[","")
+    originaltxt = originaltxt.replace("]", "")
+    originaltxt = originaltxt.replace("'", "")
+    translatedtxt = str(appOut[1])
+    translatedtxt = translatedtxt.replace("[", "")
+    translatedtxt = translatedtxt.replace("]", "")
+    translatedtxt = translatedtxt.replace("'", "")
+    rendered = render_template("template.html",text1 = originaltxt, text2 = translatedtxt)
     return rendered
 
 @app.route("/upload-image", methods=["GET", "POST"])
@@ -25,10 +32,17 @@ def upload_image():
             image = request.files["image"]
             image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
             projectpath = image.filename
-            appOut = runAppUpl(projectpath)
-            rendered = render_template('template.html', \
-                                       title="Output", \
-                                       text=[str(appOut[0]), str(appOut[1])])
+            lang = request.form['language']
+            appOut = runAppUpl(projectpath,lang)
+            originaltxt = str(appOut[0])
+            originaltxt = originaltxt.replace("[", "")
+            originaltxt = originaltxt.replace("]", "")
+            originaltxt = originaltxt.replace("'", "")
+            translatedtxt = str(appOut[1])
+            translatedtxt = translatedtxt.replace("[", "")
+            translatedtxt = translatedtxt.replace("]", "")
+            translatedtxt = translatedtxt.replace("'", "")
+            rendered = render_template("template.html",text1=originaltxt, text2=translatedtxt)
             return rendered
     return render_template("upload_image.html")
 

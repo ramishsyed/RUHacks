@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Flask Tutorial</title>
+ <head>
+    <title>Flask app</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     {% block content %}
-
-    <h1> AppName </h1>
-    <p> Enter image URL </p>
+    <img src="https://i.imgur.com/LsqGvcq.png">
+    <br>
+    <img src="https://i.imgur.com/ZjydUb4.png">
 
     <form action="{{ url_for('handle_data') }}" method="post">
+      <select name="language" size="4" multiple>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="es">Spanish</option>
+      <option value="ja">Japanese</option>
+      </select>
+      <br>
     <input type="text" name="imgurl">
     <input type="submit">
 
